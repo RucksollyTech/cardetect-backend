@@ -1,0 +1,1 @@
+web: gunicorn cardetect.wsgi --workers 2 --timeout 120

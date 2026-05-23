@@ -1,0 +1,7 @@
+from django.urls import path
+from .views import PredictView, HistoryView
+
+urlpatterns = [
+    path('predict/', PredictView.as_view()),
+    path('history/', HistoryView.as_view()),
+]
