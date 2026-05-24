@@ -1,6 +1,6 @@
 from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from .views import RegisterView, MeView, LogoutView
+from .views import RegisterView, MeView, LogoutView, google_callback
 
 urlpatterns = [
     path('register/',       RegisterView.as_view()),
@@ -8,4 +8,5 @@ urlpatterns = [
     path('token/refresh/',  TokenRefreshView.as_view()),
     path('logout/',         LogoutView.as_view()),
     path('me/',             MeView.as_view()),
+    path('google/callback/',  google_callback), 
 ]

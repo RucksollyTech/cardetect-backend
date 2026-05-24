@@ -4,6 +4,9 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.models import User
 from .serializers import RegisterSerializer, UserSerializer
+from django.contrib.auth.decorators import login_required
+from decouple import config
+from django.shortcuts import redirect
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -22,3 +25,21 @@ class LogoutView(APIView):
             return Response({'detail': 'Logged out.'})
         except Exception:
             return Response({'detail': 'Invalid token.'}, status=400)
+
+@login_required
+def google_callback(request):
+    user = request.user
+    refresh = RefreshToken.for_user(user)
+    access = str(refresh.access_token)
+    refresh_token = str(refresh)
+
+    # Redirect to Next.js with tokens in URL params
+    frontend_url = config('FRONTEND_URL', default='http://localhost:3000')
+    return redirect(f"{frontend_url}/auth/google?access={access}&refresh={refresh_token}")        
+
+
+
+
+
+
+

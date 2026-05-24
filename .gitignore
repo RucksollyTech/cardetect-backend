@@ -19,6 +19,7 @@ secret_key.txt
 
 # Media files
 /media/
+media/
 
 # Virtual environment
 venv/
