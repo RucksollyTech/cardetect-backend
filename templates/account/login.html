@@ -1,0 +1,39 @@
+<!-- templates/account/login.html -->
+{% extends "account/base.html" %}
+{% block title %}Sign In — CarDetect AI{% endblock %}
+{% block subtitle %}Sign in to your account{% endblock %}
+
+{% block content %}
+
+  <form method="POST" action="{% url 'account_login' %}" class="space-y-4">
+    {% csrf_token %}
+    <div>
+      <label class="block text-sm text-gray-400 mb-1.5">Email or Username</label>
+      <input name="login" type="text" required placeholder="you@email.com"
+        class="w-full bg-gray-800 text-white border border-gray-700 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500 transition"/>
+    </div>
+    <div>
+      <label class="block text-sm text-gray-400 mb-1.5">Password</label>
+      <input name="password" type="password" required placeholder="••••••••"
+        class="w-full bg-gray-800 text-white border border-gray-700 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500 transition"/>
+    </div>
+    <div class="flex items-center justify-between">
+      <label class="flex items-center gap-2 text-sm text-gray-400 cursor-pointer">
+        <input type="checkbox" name="remember" class="rounded border-gray-600 bg-gray-800"/>
+        Remember me
+      </label>
+      <a href="{% url 'account_reset_password' %}" class="text-sm text-blue-400 hover:text-blue-300">
+        Forgot password?
+      </a>
+    </div>
+    <button type="submit"
+      class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition">
+      Sign in
+    </button>
+  </form>
+
+  <p class="text-center text-sm text-gray-500 mt-6">
+    No account?
+    <a href="{% url 'account_signup' %}" class="text-blue-400 hover:text-blue-300">Register</a>
+  </p>
+{% endblock %}

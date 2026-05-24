@@ -1,0 +1,22 @@
+<!-- templates/socialaccount/signup.html -->
+{% extends "account/base.html" %}
+{% block title %}Complete Sign In — CarDetect AI{% endblock %}
+{% block subtitle %}Complete your Google sign in{% endblock %}
+
+{% block content %}
+  
+
+  <form method="POST" action="{% url 'socialaccount_signup' %}" class="space-y-4">
+    {% csrf_token %}
+    <div>
+      <label class="block text-sm text-gray-400 mb-1.5">Username</label>
+      <input name="username" type="text" required value="{{ form.username.value|default:'' }}"
+        placeholder="choose a username"
+        class="w-full bg-gray-800 text-white border border-gray-700 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500 transition"/>
+    </div>
+    <button type="submit"
+      class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition">
+      Complete sign in
+    </button>
+  </form>
+{% endblock %}
