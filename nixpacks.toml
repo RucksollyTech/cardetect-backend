@@ -2,4 +2,4 @@
 cmds = ["pip install -r requirements.txt"]
 
 [phases.deploy]
-cmds = ["python manage.py migrate --no-input", "python manage.py collectstatic --no-input"]
+cmds = ["python manage.py makemigrations","python manage.py makemigrations detector","python manage.py migrate --no-input", "python manage.py collectstatic --no-input"]
