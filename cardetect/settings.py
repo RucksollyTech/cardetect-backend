@@ -15,7 +15,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*').split(',')
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='http://localhost:3000' if DEBUG else "https://web-production-cd6b8.up.railway.app").split(',')
 
 
 # Application definition
@@ -76,7 +76,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'cardetect.wsgi.application'
 
-
+CSRF_TRUSTED_ORIGINS = config(
+    "CSRF_TRUSTED_ORIGINS",
+    default='http://localhost:3000' if DEBUG else "https://web-production-cd6b8.up.railway.app"
+).split(",")
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -188,7 +191,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-CORS_ALLOWED_ORIGINS = config('CORS_ORIGINS', default='http://localhost:3000').split(',')
+CORS_ALLOWED_ORIGINS = config('CORS_ORIGINS', default='http://localhost:3000' if DEBUG else "https://web-production-cd6b8.up.railway.app").split(',')
 
 LOGIN_REDIRECT_URL = '/api/auth/google/callback/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
