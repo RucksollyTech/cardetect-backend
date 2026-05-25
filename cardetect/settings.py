@@ -198,8 +198,8 @@ LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 ML_MODEL_PATH = BASE_DIR / 'detector' / 'ml' / 'cardetect_final.pt'
 
-
-
+ACCOUNT_LOGIN_ON_EMAIL_VERIFICATION = True
+SOCIALACCOUNT_LOGIN_ON_GET = True
 
 
 
