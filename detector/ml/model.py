@@ -36,7 +36,7 @@ _class_names = None
 def get_model():
     global _model, _class_names
     if _model is None:
-        checkpoint = torch.load(settings.ML_MODEL_PATH, map_location='cpu')
+        checkpoint = torch.load(settings.ML_MODEL_PATH, map_location='cpu',weights_only=False)
         _class_names = checkpoint['class_names']
         _model = _build_model()
         _model.load_state_dict(checkpoint['model_state_dict'])

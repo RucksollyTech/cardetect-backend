@@ -30,12 +30,15 @@ class LogoutView(APIView):
 def google_callback(request):
     user = request.user
     refresh = RefreshToken.for_user(user)
-    access = str(refresh.access_token)
-    refresh_token = str(refresh)
-
-    # Redirect to Next.js with tokens in URL params
+    
     frontend_url = config('FRONTEND_URL', default='http://localhost:3000')
-    return redirect(f"{frontend_url}/auth/google?access={access}&refresh={refresh_token}")        
+    return redirect(
+        f"{frontend_url}/auth/google"
+        f"?access={str(refresh.access_token)}"
+        f"&refresh={str(refresh)}"
+    )
+
+
 
 
 
