@@ -196,12 +196,12 @@ CORS_ALLOWED_ORIGINS = config('CORS_ORIGINS', default='http://localhost:3000' if
 LOGIN_REDIRECT_URL = '/api/auth/google/callback/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
 
-ML_MODEL_PATH = BASE_DIR / 'detector' / 'ml' / 'cardetect_final.pt'
+# ML_MODEL_PATH = BASE_DIR / 'detector' / 'ml' / 'cardetect_final.pt'
 
 ACCOUNT_LOGIN_ON_EMAIL_VERIFICATION = True
 SOCIALACCOUNT_LOGIN_ON_GET = True
 
-
+HF_REPO_ID = config('HF_REPO_ID')
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

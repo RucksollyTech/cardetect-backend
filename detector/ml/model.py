@@ -5,6 +5,8 @@ from torchvision import transforms
 from PIL import Image
 import json
 from django.conf import settings
+from huggingface_hub import hf_hub_download
+import os
 
 IMG_SIZE = 384
 
@@ -33,10 +35,26 @@ def _build_model(num_classes=196):
 _model = None
 _class_names = None
 
+# def get_model():
+#     global _model, _class_names
+#     if _model is None:
+#         checkpoint = torch.load(settings.ML_MODEL_PATH, map_location='cpu',weights_only=False)
+#         _class_names = checkpoint['class_names']
+#         _model = _build_model()
+#         _model.load_state_dict(checkpoint['model_state_dict'])
+#         _model.eval()
+#     return _model, _class_names
+
 def get_model():
     global _model, _class_names
     if _model is None:
-        checkpoint = torch.load(settings.ML_MODEL_PATH, map_location='cpu',weights_only=False)
+        # model_path = settings.ML_MODEL_PATH
+        # if not os.path.exists(model_path):
+        model_path = hf_hub_download(
+            repo_id=settings.HF_REPO_ID,
+            filename="cardetect_final.pt"
+        )
+        checkpoint = torch.load(model_path, map_location='cpu',weights_only=False)
         _class_names = checkpoint['class_names']
         _model = _build_model()
         _model.load_state_dict(checkpoint['model_state_dict'])
